@@ -1,0 +1,49 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, build with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Project files
+.idea
+
+# IDE related files
+.vscode/
+
+# dist packages
+dist/
+
+# OSX related files
+.DS_Store
+/hornet
+
+# Database directory
+mainnetdb/
+comnetdb/
+devnetdb/
+alphanetdb/
+lpdb/
+
+# snapshot dir
+snapshots/
+
+# log files
+hornet.log
+integration-tests/logs/*.log
+integration-tests/logs/*.html
+integration-tests/logs/*.profile
+
+# coordinator files
+coordinator.tree
+coordinator.state
+
+
+# snapshotMainnet.txt
+snapshotMainnet.txt

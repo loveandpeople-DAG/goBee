@@ -1,0 +1,21 @@
+if [ $1 -eq 1 ]; then
+    /usr/bin/systemctl preset hornet.service >/dev/null 2>&1 ||:
+    # print site info
+    cat <<EOF
+######################################
+HORNET installation finished
+######################################
+WARNING: The autopeering plugin will disclose your public IP address to possibly all nodes and entry points. Please disable the plugin prior to the first start if you do not want this to happen!
+
+Please edit the config files (/var/lib/hornet/config.json and /var/lib/hornet/peering.json) to fit your needs.
+To start HORNET the first time, please run:
+
+sudo systemctl enable hornet && sudo service hornet start
+
+EOF
+
+    mkdir -p /var/lib/hornet
+    chmod 700 /var/lib/hornet
+    chown hornet:hornet /var/lib/hornet
+
+fi

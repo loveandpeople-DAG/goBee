@@ -1,0 +1,15 @@
+latest-export.bin
+export.bin
+export_comnet.bin
+.github
+.git
+docker/
+mainnetdb/
+comnetdb/
+snapshot/
+README.md
+.dockerignore
+docker-compose.yml
+layer*.csv
+coordinator.state
+coordinator.tree
