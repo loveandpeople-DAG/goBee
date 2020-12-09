@@ -334,8 +334,6 @@ github.com/loveandpeople-DAG/goClient v0.0.0-20201207111846-64f0946bdc28 h1:qym/
 github.com/loveandpeople-DAG/goClient v0.0.0-20201207111846-64f0946bdc28/go.mod h1:rxs5FCSa8gwb1kjh2Nc8QP34uAHZud1K6S2ggdZbaFw=
 github.com/loveandpeople-DAG/goHive v0.0.0-20201208021357-56fd9fea64e5 h1:VVd5jTDg1cJeMRzC/gvPoGziiJ6C05H4uiRMeRK3qr0=
 github.com/loveandpeople-DAG/goHive v0.0.0-20201208021357-56fd9fea64e5/go.mod h1:NuBnQsuKxjTCCKLONuR0iaXUpuCdPBFVDyPyfLVyivI=
-github.com/loveandpeople-DAG/newLp.go v0.0.9 h1:pDhYgu59jv872uXdC+iL+foM29xp6mwDFlGzFmHGb/4=
-github.com/loveandpeople-DAG/newLp.go v0.0.9/go.mod h1:i8Xrre3X75RQv+8u2DKtdwzHXTtyRWI7VDod4uPKlh8=
 github.com/magiconair/properties v1.8.0/go.mod h1:PppfXfuXeibc/6YijjN8zIbojt8czPbwD3XqdrwzmxQ=
 github.com/magiconair/properties v1.8.1 h1:ZC2Vc7/ZFkGmsVC9KvOjumD+G5lXy2RtTKyzRKO2BQ4=
 github.com/magiconair/properties v1.8.1/go.mod h1:PppfXfuXeibc/6YijjN8zIbojt8czPbwD3XqdrwzmxQ=
