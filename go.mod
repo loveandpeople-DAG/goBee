@@ -25,7 +25,7 @@ require (
 	github.com/kr/pretty v0.2.1 // indirect
 	github.com/labstack/echo/v4 v4.1.17
 	github.com/labstack/gommon v0.3.0
-	github.com/loveandpeople-DAG/goClient v1.0.3-lp-billion-1.3
+	github.com/loveandpeople-DAG/goClient v1.0.4-lp-billion-1.3
 	github.com/loveandpeople-DAG/goHive v0.0.0-20201208021357-56fd9fea64e5
 	github.com/mitchellh/mapstructure v1.3.3
 	github.com/mr-tron/base58 v1.2.0

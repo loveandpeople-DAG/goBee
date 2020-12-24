@@ -1,12 +1,12 @@
 package webapi
 
 import (
+	"github.com/loveandpeople-DAG/goBee/plugins/autopeering"
+	"github.com/loveandpeople-DAG/goHive/node"
 	"net/http"
 	"time"
 
 	"github.com/gin-gonic/gin"
-
-	"github.com/loveandpeople-DAG/goClient/consts"
 
 	"github.com/loveandpeople-DAG/goBee/pkg/config"
 	"github.com/loveandpeople-DAG/goBee/pkg/metrics"
@@ -15,7 +15,11 @@ import (
 	"github.com/loveandpeople-DAG/goBee/plugins/gossip"
 	"github.com/loveandpeople-DAG/goBee/plugins/peering"
 	tangleplugin "github.com/loveandpeople-DAG/goBee/plugins/tangle"
+	wapi "github.com/loveandpeople-DAG/goClient/api"
+	"github.com/loveandpeople-DAG/goClient/consts"
 )
+
+var nodeStartAt = time.Now()
 
 func init() {
 	addEndpoint("getNodeInfo", getNodeInfo, implementedAPIcalls)
@@ -24,7 +28,7 @@ func init() {
 
 func getNodeInfo(_ interface{}, c *gin.Context, _ <-chan struct{}) {
 	// Basic info data
-	result := GetNodeInfoReturn{
+	result := wapi.GetNodeInfoResponse{
 		AppName:    cli.AppName,
 		AppVersion: cli.AppVersion,
 	}
@@ -39,7 +43,7 @@ func getNodeInfo(_ interface{}, c *gin.Context, _ <-chan struct{}) {
 
 	// Latest milestone index
 	lmi := tangle.GetLatestMilestoneIndex()
-	result.LatestMilestoneIndex = lmi
+	result.LatestMilestoneIndex = uint32(lmi)
 	result.LatestMilestone = consts.NullHashTrytes
 
 	// Latest milestone hash
@@ -51,7 +55,7 @@ func getNodeInfo(_ interface{}, c *gin.Context, _ <-chan struct{}) {
 
 	// Solid milestone index
 	smi := tangle.GetSolidMilestoneIndex()
-	result.LatestSolidSubtangleMilestoneIndex = smi
+	result.LatestSolidSubtangleMilestoneIndex = uint32(smi)
 	result.LatestSolidSubtangleMilestone = consts.NullHashTrytes
 	result.IsSynced = tangle.IsNodeSyncedWithThreshold()
 	result.Health = tangleplugin.IsNodeHealthy()
@@ -66,8 +70,8 @@ func getNodeInfo(_ interface{}, c *gin.Context, _ <-chan struct{}) {
 	// Milestone start index
 	snapshotInfo := tangle.GetSnapshotInfo()
 	if snapshotInfo != nil {
-		result.MilestoneStartIndex = snapshotInfo.PruningIndex
-		result.LastSnapshottedMilestoneIndex = snapshotInfo.SnapshotIndex
+		result.MilestoneStartIndex = uint32(snapshotInfo.PruningIndex)
+		result.LastSnapshottedMilestoneIndex = uint32(snapshotInfo.SnapshotIndex)
 	}
 
 	// System time
@@ -90,6 +94,14 @@ func getNodeInfo(_ interface{}, c *gin.Context, _ <-chan struct{}) {
 
 	// Coo addr
 	result.CoordinatorAddress = config.NodeConfig.GetString(config.CfgCoordinatorAddress)
+
+	// node status
+	result.Uptime = time.Since(nodeStartAt).Milliseconds()
+	if !node.IsSkipped(autopeering.PLUGIN) {
+		result.AutopeeringID = autopeering.ID
+	}
+	result.IsHealthy = tangleplugin.IsNodeHealthy()
+	result.NodeAlias = config.NodeConfig.GetString(config.CfgNodeAlias)
 
 	// Return node info
 	c.JSON(http.StatusOK, result)
