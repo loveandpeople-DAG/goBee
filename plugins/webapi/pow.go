@@ -13,9 +13,8 @@ import (
 	"github.com/loveandpeople-DAG/goClient/transaction"
 	"github.com/loveandpeople-DAG/goClient/trinary"
 
-	"github.com/loveandpeople-DAG/goHive/batchhasher"
-
 	"github.com/loveandpeople-DAG/goBee/pkg/config"
+	"github.com/loveandpeople-DAG/goBee/plugins/curl"
 	"github.com/loveandpeople-DAG/goBee/plugins/pow"
 )
 
@@ -125,7 +124,13 @@ func attachToTangle(i interface{}, c *gin.Context, _ <-chan struct{}) {
 		}
 
 		// Calculate the transaction hash with the batched hasher
-		hashTrits := batchhasher.CURLP81.Hash(txTrits)
+		hashTrits, err := curl.Hasher().Hash(txTrits)
+		if err != nil {
+			e.Error = err.Error()
+			c.JSON(http.StatusInternalServerError, e)
+			return
+		}
+
 		txs[i].Hash = trinary.MustTritsToTrytes(hashTrits)
 
 		prev = txs[i].Hash

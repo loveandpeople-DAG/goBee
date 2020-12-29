@@ -1,11 +1,10 @@
-# golang 1.14.6-buster
-FROM golang@sha256:ebe7f5d1a2a6b884bc1a45b8c1ff7e26b7b95938a3e8847ea96fc6761fdc2b77 AS build
+# golang 1.15.5-buster
+FROM golang@sha256:eb88b20326f70fbf943af9d62650d8293d62fb5764c50e7477cdcb33caf9ff73 AS build
 
 # Ensure ca-certficates are up to date
 RUN update-ca-certificates
 
 # Set the current Working Directory inside the container
-RUN mkdir /app
 WORKDIR /app
 
 # Use Go Modules
@@ -27,9 +26,7 @@ RUN CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -tags="pow_avx" \
 ############################
 # Image
 ############################
-# using static nonroot image
-# user:group is nonroot:nonroot, uid:gid = 65532:65532
-FROM gcr.io/distroless/static@sha256:23aa732bba4c8618c0d97c26a72a32997363d591807b0d4c31b0bbc8a774bddf
+FROM alpine:latest
 
 EXPOSE 8081/tcp
 EXPOSE 14265/tcp
@@ -44,5 +41,13 @@ COPY ./config_devnet.json /app/config_devnet.json
 COPY ./peering.json /app/peering.json
 COPY ./profiles.json /app/profiles.json
 COPY ./mqtt_config.json /app/mqtt_config.json
+
+RUN addgroup --gid 39999 hornet \
+ && adduser -h /app -s /bin/sh -G hornet -u 39999 -D hornet \
+ && mkdir -p /app/data \
+ && chown hornet:hornet -R /app
+
+WORKDIR "/app"
+USER hornet
 
 ENTRYPOINT ["/app/hornet"]

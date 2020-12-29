@@ -8,6 +8,7 @@ import (
 	"github.com/loveandpeople-DAG/goBee/plugins/autopeering"
 	"github.com/loveandpeople-DAG/goBee/plugins/cli"
 	"github.com/loveandpeople-DAG/goBee/plugins/coordinator"
+	"github.com/loveandpeople-DAG/goBee/plugins/curl"
 	"github.com/loveandpeople-DAG/goBee/plugins/dashboard"
 	"github.com/loveandpeople-DAG/goBee/plugins/database"
 	"github.com/loveandpeople-DAG/goBee/plugins/gossip"
@@ -28,7 +29,6 @@ import (
 )
 
 func main() {
-	cli.HideConfigFlags()
 	cli.ParseFlags()
 	cli.PrintVersion()
 	cli.ParseConfig()
@@ -40,6 +40,7 @@ func main() {
 		gracefulshutdown.PLUGIN,
 		profiling.PLUGIN,
 		database.PLUGIN,
+		curl.PLUGIN,
 		autopeering.PLUGIN,
 		webapi.PLUGIN,
 	}

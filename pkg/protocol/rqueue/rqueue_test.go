@@ -6,7 +6,7 @@ import (
 
 	"github.com/loveandpeople-DAG/goBee/pkg/model/hornet"
 	"github.com/loveandpeople-DAG/goBee/pkg/protocol/rqueue"
-	"github.com/loveandpeople-DAG/goClient/trinary"
+	"github.com/loveandpeople-DAG/goClient/encoding/t5b1"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -14,11 +14,11 @@ func TestRequestQueue(t *testing.T) {
 	q := rqueue.New()
 
 	var (
-		hashA = hornet.Hash(trinary.MustTrytesToBytes("A"))
-		hashB = hornet.Hash(trinary.MustTrytesToBytes("B"))
-		hashZ = hornet.Hash(trinary.MustTrytesToBytes("Z"))
-		hashC = hornet.Hash(trinary.MustTrytesToBytes("C"))
-		hashD = hornet.Hash(trinary.MustTrytesToBytes("D"))
+		hashA = hornet.Hash(t5b1.EncodeTrytes("A"))
+		hashB = hornet.Hash(t5b1.EncodeTrytes("B"))
+		hashZ = hornet.Hash(t5b1.EncodeTrytes("Z"))
+		hashC = hornet.Hash(t5b1.EncodeTrytes("C"))
+		hashD = hornet.Hash(t5b1.EncodeTrytes("D"))
 	)
 
 	requests := []*rqueue.Request{

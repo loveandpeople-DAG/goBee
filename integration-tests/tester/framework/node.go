@@ -26,7 +26,7 @@ type Node struct {
 	Config *NodeConfig
 	// The autopeering identity of the peer.
 	*identity.Identity
-	// The lp.go web API instance used to communicate with the node.
+	// The iota.go web API instance used to communicate with the node.
 	WebAPI *api.API
 	// The more specific web API providing more information for debugging purposes.
 	DebugWebAPI *WebAPI

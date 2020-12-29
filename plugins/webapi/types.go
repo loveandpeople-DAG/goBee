@@ -173,9 +173,6 @@ type GetNodeInfoReturn struct {
 	Features                           []string        `json:"features"`
 	CoordinatorAddress                 trinary.Hash    `json:"coordinatorAddress"`
 	Duration                           int             `json:"duration"`
-	AutopeeringID                      string          `json:"autopeering_id"`
-	Uptime                             int64           `json:"uptime"`
-	IsHealthy                          bool            `json:"is_healthy"`
 }
 
 ////////////////// getNodeAPIConfiguration //////////////////////////
