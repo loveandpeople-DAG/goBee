@@ -1,6 +1,8 @@
 package webapi
 
 import (
+	"github.com/loveandpeople-DAG/goBee/plugins/autopeering"
+	"github.com/loveandpeople-DAG/goHive/node"
 	"net/http"
 	"time"
 
@@ -16,6 +18,8 @@ import (
 	"github.com/loveandpeople-DAG/goBee/plugins/peering"
 	tangleplugin "github.com/loveandpeople-DAG/goBee/plugins/tangle"
 )
+
+var nodeStartAt = time.Now()
 
 func init() {
 	addEndpoint("getNodeInfo", getNodeInfo, implementedAPIcalls)
@@ -87,6 +91,15 @@ func getNodeInfo(_ interface{}, c *gin.Context, _ <-chan struct{}) {
 	// TX to request
 	queued, pending, _ := gossip.RequestQueue().Size()
 	result.TransactionsToRequest = queued + pending
+
+	// node status
+	result.Uptime = time.Since(nodeStartAt).Milliseconds()
+	if !node.IsSkipped(autopeering.PLUGIN) {
+		result.AutopeeringID = autopeering.ID
+	}
+	result.IsHealthy = tangleplugin.IsNodeHealthy()
+	result.NodeAlias = config.NodeConfig.GetString(config.CfgNodeAlias)
+
 
 	// Coo addr
 	result.CoordinatorAddress = config.NodeConfig.GetString(config.CfgCoordinatorAddress)
