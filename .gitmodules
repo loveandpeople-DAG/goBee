@@ -1,0 +1,3 @@
+[submodule "plugins/dashboard/frontend"]
+	path = plugins/dashboard/frontend
+	url = https://github.com/loveandpeople-DAG/goBee-dashboard.git
