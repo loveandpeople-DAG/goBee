@@ -20,14 +20,13 @@ require (
 	github.com/go-zeromq/zmq4 v0.12.0
 	github.com/gobuffalo/packr/v2 v2.8.0
 	github.com/google/go-github v17.0.0+incompatible // indirect
-	github.com/google/go-querystring v1.0.0 // indirect
 	github.com/gorilla/websocket v1.4.2
 	github.com/hashicorp/go-version v1.2.1 // indirect
-	github.com/loveandpeople-DAG/goHive v0.0.0-20201229081941-fa26ab0d6230
-	github.com/loveandpeople-DAG/goClient v0.0.0-20201229074805-34d39344ec86
 	github.com/kr/pretty v0.2.1 // indirect
 	github.com/labstack/echo/v4 v4.1.17
 	github.com/labstack/gommon v0.3.0
+	github.com/loveandpeople-DAG/goClient v0.0.0-20210108084603-35b6af59862d
+	github.com/loveandpeople-DAG/goHive v0.0.0-20201229081941-fa26ab0d6230
 	github.com/mitchellh/mapstructure v1.3.3
 	github.com/mr-tron/base58 v1.2.0
 	github.com/onsi/ginkgo v1.14.2 // indirect
