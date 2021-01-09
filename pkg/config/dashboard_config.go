@@ -5,6 +5,8 @@ const (
 	CfgDashboardBindAddress = "dashboard.bindAddress"
 	// whether to run the dashboard in dev mode
 	CfgDashboardDevMode = "dashboard.dev"
+	// the host
+	CfgDashboardHost = "dashboard.host"
 	// the theme for the dashboard to use (default or dark)
 	CfgDashboardTheme = "dashboard.theme"
 	// whether to use HTTP basic auth

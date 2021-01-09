@@ -41,7 +41,11 @@ var (
 
 func indexRoute(e echo.Context) error {
 	if config.NodeConfig.GetBool(config.CfgDashboardDevMode) {
-		res, err := http.Get("http://127.0.0.1:9090/")
+		host := config.NodeConfig.GetString(config.CfgDashboardHost)
+		if host == "" {
+			host = "http://127.0.0.1:9090/"
+		}
+		res, err := http.Get(host)
 		if err != nil {
 			return err
 		}
